@@ -6,6 +6,9 @@ Tento jednoduchý script má dva vstupy, tím prvním je soubor okff.gpx (najdet
 
 Pokud se mě v budoucnosti povede napřímo komunikovat s db wwff, tak bych si ten seznam těch dosud neaktivovaných OKFF tahal automaticky tam odtud, případně bych si tahal online i nejnovější .gpx soubor z webu okff.cz. Ale to jsou jen sny zatím ...
 
+www.okff.cz
+www.wwff.co
+
 Michal 
 
 OK1SIM
