@@ -14,10 +14,13 @@ i = 0
 
 print("Zacinam pracovat, hledam, prochazim, cekej prosim ...")
 
+if(os.path.isfile('okff-without-activation.gpx')):
+    os.remove('okff-without-activation.gpx')
 
-os.remove('okff-without-activation.gpx')
-os.remove('okff.zip')
-shutil.rmtree('okff')
+if(os.path.isfile('okff.zip')):
+    os.remove('okff-without-activation.gpx')
+
+shutil.rmtree('/okff', ignore_errors=True)
 
 url = 'http://okff.wz.cz/download/okff.zip'
 wget.download(url, 'okff.zip')
