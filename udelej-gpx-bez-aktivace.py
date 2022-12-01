@@ -7,25 +7,30 @@
 
 import wget
 from zipfile import ZipFile
+import os
+import shutil
 
 i = 0
 
 print("Zacinam pracovat, hledam, prochazim, cekej prosim ...")
+
+
+os.remove('okff-without-activation.gpx')
+os.remove('okff.zip')
+shutil.rmtree('okff')
 
 url = 'http://okff.wz.cz/download/okff.zip'
 wget.download(url, 'okff.zip')
 
 ZipFile('okff.zip').extractall('okff')
 
-# nejdriv procistime soubor okff-without-.....
-file_to_delete = open("/okff/okff-without-activation.gpx",'w')
-file_to_delete.close()
+os.remove('okff.zip')
 
 with open("okff-without-activation.gpx","a") as file:
     file.write('<?xml version="1.0" encoding="windows-1250" standalone="no" ?>\n\n')
     file.write('<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="GPS Data Team ( http://www.gps-data-team.com )">\n\n')
 
-with open('okff.gpx', encoding = 'ISO-8859-1') as f:
+with open('./okff/okff.gpx', encoding = 'ISO-8859-1') as f:
     exist_lines = list(f)
     for exist_line in exist_lines:
         with open('bez-aktivace.csv') as b:
