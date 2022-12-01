@@ -2,7 +2,7 @@
 # a vytvori soubor okff-noactivation.gpx ktery ulozi a v kterem budou pouze a jen okff ze souboru .csv doplnene o presnou polohu
 # cele to slouzi k tomu, aby se dala do LOCUSU pridat dalsi vrstva s OKFF ktere jeste nikdo neaktivoval
 
-# udelal OK1SIM pro komunitu OKFF
+# udelal Michal OK1SIM pro komunitu OKFF ... 73 & 44
 # pouzivej dle libosti, upravuj, sir, proste je to tvoje ...
 
 i = 0
