@@ -5,12 +5,20 @@
 # udelal Michal OK1SIM pro komunitu OKFF ... 73 & 44
 # pouzivej dle libosti, upravuj, sir, proste je to tvoje ...
 
+import wget
+from zipfile import ZipFile
+
 i = 0
 
 print("Zacinam pracovat, hledam, prochazim, cekej prosim ...")
 
+url = 'http://okff.wz.cz/download/okff.zip'
+wget.download(url, 'okff.zip')
+
+ZipFile('okff.zip').extractall('okff')
+
 # nejdriv procistime soubor okff-without-.....
-file_to_delete = open("okff-without-activation.gpx",'w')
+file_to_delete = open("/okff/okff-without-activation.gpx",'w')
 file_to_delete.close()
 
 with open("okff-without-activation.gpx","a") as file:
