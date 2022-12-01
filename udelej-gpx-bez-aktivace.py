@@ -9,6 +9,7 @@ import wget
 from zipfile import ZipFile
 import os
 import shutil
+from urllib.request import urlopen
 
 i = 0
 
@@ -47,5 +48,7 @@ with open('./okff/okff.gpx', encoding = 'ISO-8859-1') as f:
 
 with open("okff-without-activation.gpx","a") as file:
     file.write("</gpx>")
+
+shutil.rmtree('/okff', ignore_errors=True)
 
 print("\nCelkem nalezeno v okff.gpx ", i, " OKFF mist bez aktivace a z tech jsem vytvoril soubor okff-without-activation.gpx. Hotovo, koncim!")
