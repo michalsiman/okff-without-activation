@@ -20,8 +20,11 @@ import shutil
 from urllib.request import urlopen
 
 i = 0
+okff_celkem_v_gpx_z_okffcz = 0
+okff_celkem_v_csv_z_wwff = 0
 
-print("Zacinam pracovat, hledam, prochazim, cekej prosim ...")
+print("\n\n\nScript zacal pracovat ...")
+print("\nStahuji aktualni kompletni gpx z okff.cz ...")
 
 if(os.path.isfile('okff-without-activation.gpx')):
     os.remove('okff-without-activation.gpx')
@@ -42,21 +45,48 @@ with open("okff-without-activation.gpx","a") as file:
     file.write('<?xml version="1.0" encoding="windows-1250" standalone="no" ?>\n\n')
     file.write('<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="GPS Data Team ( http://www.gps-data-team.com )">\n\n')
 
-with open('./okff/okff.gpx', encoding = 'ISO-8859-1') as f: # ve windows je třeba odstranit parametr encoding kompletně
-    exist_lines = list(f)
-    for exist_line in exist_lines:
-        with open('bez-aktivace.csv') as b:
-            new_lines = list(b)
-            for new_line in new_lines:
-                if new_line.strip() in exist_line:
-                    #print(exist_line)
-                    i = i + 1
-                    with open("okff-without-activation.gpx","a") as file:
-                        file.write(exist_line)
+try:
+    with open('./okff/okff.gpx') as f: # windows varianta
+        exist_lines = list(f)
+        for exist_line in exist_lines:
+            if "OKFF-" in exist_line:
+                okff_celkem_v_gpx_z_okffcz += 1
+                okff_celkem_v_csv_z_wwff = 0
+                with open('bez-aktivace.csv') as b:
+                    new_lines = list(b)
+                    for new_line in new_lines:
+                        okff_celkem_v_csv_z_wwff += 1
+                        if new_line.strip() in exist_line:
+                            #print(exist_line)
+                            i = i + 1
+                            with open("okff-without-activation.gpx","a") as file:
+                                file.write(exist_line)
+
+except:
+    with open('./okff/okff.gpx', encoding = 'ISO-8859-1') as f: # linux varianta
+        exist_lines = list(f)
+        for exist_line in exist_lines:
+            if "OKFF-" in exist_line:
+                okff_celkem_v_gpx_z_okffcz += 1
+                okff_celkem_v_csv_z_wwff = 0
+                with open('bez-aktivace.csv') as b:
+                    new_lines = list(b)
+                    for new_line in new_lines:
+                        okff_celkem_v_csv_z_wwff += 1
+                        if new_line.strip() in exist_line:
+                            #print(exist_line)
+                            i = i + 1
+                            with open("okff-without-activation.gpx","a") as file:
+                                file.write(exist_line)
 
 with open("okff-without-activation.gpx","a") as file:
     file.write("</gpx>")
 
 shutil.rmtree('/okff', ignore_errors=True)
 
-print("\nCelkem nalezeno v okff.gpx ", i, " OKFF mist bez aktivace a z tech jsem vytvoril soubor okff-without-activation.gpx. Hotovo, koncim!")
+print("\n")
+print("\nCelkem zpracovano z okff.gpx radku: ",okff_celkem_v_gpx_z_okffcz)
+print("\nCelkem je radku v CSV souboru z wwff: ",okff_celkem_v_csv_z_wwff)
+print("\nCelkem nalezeno v okff.gpx mist bez aktivace: ", i)
+print("\nVytvoren soubor okff-without-activation.gpx.")
+print("\n")
